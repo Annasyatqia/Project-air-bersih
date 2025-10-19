@@ -1,0 +1,53 @@
+body {
+  background-color: #fefefe; /* Creme hampir putih */
+  color: #222;
+  font-family: "Poppins", sans-serif;
+}
+
+h1, h2, h3 {
+  color: #4682b4; /* Biru tua pastel */
+  font-weight: 600;
+}
+
+.stButton > button {
+  background-color: #4682b4; /* Biru tua pastel */
+  color: white;
+  border-radius: 10px;
+  padding: 0.6em 1.2em;
+  font-weight: 600;
+  border: none;
+}
+
+.stButton > button:hover {
+  background-color: #2e5984; /* Lebih gelap untuk hover */
+}
+
+.stDataFrame, .stPlotlyChart {
+  background: #ffffff; /* Putih untuk kontras */
+  border-radius: 10px;
+  box-shadow: 0px 2px 5px rgba(70, 130, 180, 0.2); /* Shadow dengan biru tua pastel */
+  padding: 10px;
+}
+
+footer {
+  visibility: hidden;
+}
+
+/* Tambahan untuk sidebar */
+.sidebar .sidebar-content {
+  background-color: #f0f8ff; /* Biru sangat muda untuk sidebar */
+}
+
+/* Tambahan untuk tabs */
+.stTabs [data-baseweb="tab-list"] {
+  background-color: #fefefe;
+}
+
+.stTabs [data-baseweb="tab"] {
+  color: #4682b4;
+}
+
+.stTabs [data-baseweb="tab"][aria-selected="true"] {
+  background-color: #4682b4;
+  color: white;
+}
