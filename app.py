@@ -325,31 +325,43 @@ with tab4:
 with tab5:
     st.subheader("🗺️ Visualisasi Peta Jawa Barat")
     st.write("Peta menampilkan distribusi ketersediaan air bersih berdasarkan hasil prediksi model.")
-    
-    try:
-        with open("data/indonesia-edit.geojson", 'r', encoding='utf-8') as f:
-            geojson_data = json.load(f)
-        gdf = gpd.GeoDataFrame.from_features(geojson_data["features"])
-        gdf_jabar = gdf[gdf["provinsi"].str.contains("Jawa Barat", case=False, na=False)]
-        
-        if "nama_wilayah" in df_processed.columns:
-            merged = gdf_jabar.merge(df_processed, left_on="kabupaten", right_on="nama_wilayah", how="left")
-        else:
-            merged = gdf_jabar
-        
-        fig = px.choropleth(
-            merged,
-            geojson=geojson_data,
-            locations="kabupaten",
-            featureidkey="properties.kabupaten",
-            color="ketersediaan_air_minum_sumber_kemasan",
-            color_continuous_scale="RdYlBu_r",
-            title="Distribusi Ketersediaan Air Bersih di Jawa Barat"
-        )
-        fig.update_geos(fitbounds="locations", visible=False)
-        st.plotly_chart(fig, use_container_width=True)
-        
-    except Exception as e:
-        st.error(f"❌ Gagal memuat peta: {e}")
 
-st.success("✅ Analisis selesai! Silakan eksplorasi tab lainnya untuk lebih banyak fitur.")
+    try:
+        with open("data/indonesia-edit.geojson", "r", encoding="utf-8") as f:
+            geojson_data = json.load(f)
+
+        # Filter GeoJSON agar hanya menampilkan provinsi Jawa Barat
+        geojson_jabar = {
+            "type": "FeatureCollection",
+            "features": [
+                feat for feat in geojson_data["features"]
+                if "Jawa Barat" in feat["properties"].get("Propinsi", "")
+            ]
+        }
+
+        # Pastikan ada kolom wilayah di data hasil prediksi
+        if "nama_wilayah" in df_processed.columns:
+            df_map = df_processed.copy()
+            df_map["nama_wilayah"] = df_map["nama_wilayah"].str.title()
+        else:
+            st.warning("Kolom 'nama_wilayah' tidak ditemukan, gunakan kolom sesuai data Anda.")
+            df_map = df_processed
+
+        # Buat peta interaktif dengan Plotly
+        fig = px.choropleth_mapbox(
+            df_map,
+            geojson=geojson_jabar,
+            locations="nama_wilayah",
+            featureidkey="properties.Kabupaten",
+            color="ketersediaan_air_minum_sumber_kemasan",
+            color_continuous_scale="RdPu",
+            mapbox_style="carto-positron",
+            zoom=7,
+            center={"lat": -6.9, "lon": 107.6},
+            opacity=0.6,
+            title="Distribusi Ketersediaan Air Bersih di Provinsi Jawa Barat"
+        )
+        st.plotly_chart(fig, use_container_width=True)
+
+    except Exception as e:
+        st.error(f"❌ Gagal memuat peta Jawa Barat: {e}")

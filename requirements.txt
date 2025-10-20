@@ -6,7 +6,3 @@ scikit-learn
 imbalanced-learn
 streamlit
 plotly
-geopandas
-shapely
-fiona
-pyproj
