@@ -134,7 +134,7 @@ with tab2:
     df_processed[num_cols] = scaler.fit_transform(df_processed[num_cols])
     
     # Split data
-    exclude_cols = ['id', 'kode_wilayah', 'nama_wilayah']
+    exclude_cols = ['id', 'kode_wilayah', 'bps_nama_kabupaten_kota']
     available_exclude = [c for c in exclude_cols if c in df_processed.columns]
     X = df_processed.select_dtypes(include='number').drop(columns=[target_col] + available_exclude, errors='ignore')
     y = df_processed[target_col] if target_col in df_processed.columns else None
@@ -350,7 +350,7 @@ with tab5:
         fig = px.choropleth_mapbox(
             df_map,
             geojson=geojson_jabar,
-            locations="nama_wilayah",
+            locations="bps_nama_kabupaten_kota",
             featureidkey="properties.Kabupaten",
             color="ketersediaan_air_minum_sumber_kemasan",
             color_continuous_scale="RdPu",
