@@ -2,11 +2,21 @@ body {
   background-color: #fefefe; /* Creme hampir putih */
   color: #222;
   font-family: "Poppins", sans-serif;
+  margin: 0;
+  padding: 0;
+}
+
+/* Container utama untuk rata kiri-kanan */
+.appview-container .main .block-container {
+  max-width: 1200px; /* Lebar maksimal untuk rapi */
+  margin: 0 auto; /* Rata tengah */
+  padding: 20px; /* Padding untuk ruang */
 }
 
 h1, h2, h3 {
   color: #4682b4; /* Biru tua pastel */
   font-weight: 600;
+  text-align: center; /* Rata tengah untuk header */
 }
 
 .stButton > button {
@@ -16,6 +26,7 @@ h1, h2, h3 {
   padding: 0.6em 1.2em;
   font-weight: 600;
   border: none;
+  width: 100%; /* Lebar penuh untuk konsistensi */
 }
 
 .stButton > button:hover {
@@ -27,27 +38,63 @@ h1, h2, h3 {
   border-radius: 10px;
   box-shadow: 0px 2px 5px rgba(70, 130, 180, 0.2); /* Shadow dengan biru tua pastel */
   padding: 10px;
+  margin: 10px 0; /* Margin atas-bawah untuk ruang */
 }
 
 footer {
   visibility: hidden;
 }
 
-/* Tambahan untuk sidebar */
+/* Sidebar */
 .sidebar .sidebar-content {
   background-color: #f0f8ff; /* Biru sangat muda untuk sidebar */
+  padding: 20px; /* Padding untuk rapi */
 }
 
-/* Tambahan untuk tabs */
+/* Tabs */
 .stTabs [data-baseweb="tab-list"] {
   background-color: #fefefe;
+  justify-content: center; /* Rata tengah untuk tab list */
+  gap: 10px; /* Jarak antar tab */
 }
 
 .stTabs [data-baseweb="tab"] {
   color: #4682b4;
+  border-radius: 8px;
+  padding: 10px 15px;
+  font-weight: 500;
 }
 
 .stTabs [data-baseweb="tab"][aria-selected="true"] {
   background-color: #4682b4;
   color: white;
+}
+
+/* Konten tab untuk rapi */
+.stTabs [data-baseweb="tab-panel"] {
+  background: #fefefe;
+  border-radius: 10px;
+  padding: 20px; /* Padding dalam tab */
+  margin-top: 10px;
+  box-shadow: 0px 2px 5px rgba(70, 130, 180, 0.1); /* Shadow ringan */
+}
+
+/* Kolom untuk rata */
+.stColumns {
+  gap: 20px; /* Jarak antar kolom */
+}
+
+/* Spinner dan metric */
+.stSpinner, .stMetric {
+  text-align: center; /* Rata tengah */
+}
+
+/* Responsivitas */
+@media (max-width: 768px) {
+  .appview-container .main .block-container {
+    padding: 10px;
+  }
+  .stTabs [data-baseweb="tab-list"] {
+    flex-direction: column; /* Tab vertikal di mobile */
+  }
 }
